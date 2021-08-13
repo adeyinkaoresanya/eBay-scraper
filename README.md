@@ -16,8 +16,9 @@ This information include category, title, price, image url and link to each prod
 ## Usage
 
 The scraper function takes in the name of the product listing of interest 
-and the number of items to scrape and then returns a dataframe which is converted to CSV and later stored in the database.
-More than one product can be entered into the function.
+and the number of items to scrape and then returns a dataframe which can be converted to CSV and stored in the database.
+
+Note: More than one product can be entered into the function.
 
 ```python
 
