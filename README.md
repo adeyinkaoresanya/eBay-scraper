@@ -20,17 +20,31 @@ and the number of items to scrape and then returns a dataframe which is converte
 More than one product can be entered into the function.
 
 ```python
+
 data= get_data('ps4', 'iphone', 'camera', number_of_items= 3600)
+
 data.to_csv('products.csv', index= False)
 
+```
 
-# To store in database 
-# (Note: This assumes connection has been established with the database. Check the source code for more information)
+To store data in the database, pass in the database connection string using appropriate credentials (check the source code for more information) and the dataframe to be stored in the database connector function, to_database():
 
-engine = create_engine(db_host, echo= False)
-db = scoped_session(sessionmaker(bind=engine))
+```python
+
 df = pd.read_csv("products.csv")
-df.to_sql("products", engine, if_exists= "replace", index= False)
+
+to_database(db_host, df)
+
+```
+
+To query a database and send to csv, pass in the database connection string and the query to the create_csv() function:
+
+```python
+
+query= "SELECT C.id, P.* FROM products AS P LEFT JOIN productcategory AS C  ON C.category = P.category"
+
+create_csv(db_host, query)
+
 db.commit()
 
 db.close()
