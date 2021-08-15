@@ -31,7 +31,7 @@ def get_data(*keywords: str, number_of_items: int) -> pd.DataFrame:
                 headers= {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"} 
                 page= requests.get(url, headers= headers)
                 soup= BeautifulSoup(page.text, 'html.parser')
-                items= soup.find_all('li', {'class': "s-item"})[1:-1]
+                items= soup.find_all('li', {'class': "s-item"})[1:-1] #The first and the last items are excluded because information is missing
                 for item in items:
                     title= item.find("h3", {"class": "s-item__title" }).text
                     price= item.find_all("span", {"class": "s-item__price" })[0].text.strip('C $ ,').split('to')[0].replace(',', '')
