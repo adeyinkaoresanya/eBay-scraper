@@ -46,6 +46,7 @@ def request_page(url: str) -> requests.Response:
         print("Error processing request")
     return page
 
+
 def create_soup(page: requests.Response):
     """
     This function parses the html
@@ -58,6 +59,8 @@ def create_soup(page: requests.Response):
     """
     soup= BeautifulSoup(page.text, 'html.parser')
     return soup
+
+
 
 def find_items(soup, keyword):
     items= soup.find_all('li', {'class': "s-item"})[1:-1] #The first and the last items are excluded because information is missing
@@ -72,11 +75,31 @@ def find_items(soup, keyword):
 
 
 
-def create_dataframe(data_list):
+def create_dataframe(data_list: list) -> pd.DataFrame:
+    """
+    This function creates a dataframe from a list
+
+    Args:
+        data_list (str): list of values
+
+    Returns:
+        data (pd.DataFrame): a dataframe of input values 
+    """
     data= pd.DataFrame(data_list)
     return data
 
-def create_csv(data, file_title):
+
+def create_csv(data: pd.DataFrame, file_title: str) -> None:
+    """
+    This function converts a dataframe to a csv
+
+    Args:
+        data (pd.DataFrame): the dataframe to be converted to csv
+        file_title (str): title of the output file
+
+    Returns:
+        None   
+    """
     data.to_csv(f'{file_title}.csv', index= False)
 
 
@@ -109,10 +132,5 @@ def scrape_data (*keywords:str, number_of_items: int) -> pd.DataFrame:
     return data
 
 
-if __name__ == '__main__':   
-
-    df= scrape_data ('ps4', 'iphone', 'camera', number_of_items= 100)
-    print(len(df))
-    create_csv(df, 'table 3')
 
 
