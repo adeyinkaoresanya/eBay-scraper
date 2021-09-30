@@ -15,10 +15,9 @@ In addition,  a module for connecting to the database, creating tables and conve
 
 ## Usage
 
-The scraper function takes in the name of the product listing of interest.
-and the number of items to scrape and then returns a dataframe which can be converted to CSV and stored in the database.
+The scraper function takes in the name of the product listing of interest and the number of items to scrape and then returns a dataframe which can be converted to CSV and stored in the database.
 
-Note: More than one product can be entered into the function.
+Note: More than one product can be passed into the function.
 
 ```python
 
